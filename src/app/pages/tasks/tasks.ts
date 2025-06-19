@@ -11,9 +11,21 @@ import { Task } from '../../interfaces/task';
 })
 
 export class Tasks {
+
   tasks: Task[] = [];
   newTaskDescription: string = '';
   errorMessage: string = '';
+
+  constructor(){
+    this.loadDataFromLocalStorage()
+  }
+
+  loadDataFromLocalStorage(){
+    const dataFromLocalStorage : string | null = localStorage.getItem('angular-tasks')
+    if (dataFromLocalStorage) { //Comprobar que la variable dataFromLocalStorage sea distinta de null
+      this.tasks = JSON.parse(dataFromLocalStorage)
+    }
+  }
 
   addTask(): void {
     //Validar si la descripción está vacía
